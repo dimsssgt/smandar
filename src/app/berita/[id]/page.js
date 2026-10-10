@@ -3,6 +3,10 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { newsData } from "../../../components/NewsCard";
 
+export function generateStaticParams() {
+  return newsData.map((article) => ({ id: String(article.id) }));
+}
+
 export default async function BeritaDetailPage({ params }) {
   const { id } = await params;
   const article = newsData.find((n) => String(n.id) === id);
