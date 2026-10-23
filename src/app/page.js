@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import NewsCard, { newsData } from "../components/NewsCard";
+import NewsList from "../components/NewsList";
+import InfoSection from "../components/InfoSection";
 
 const info = [
   { value: "A", label: "Akreditasi Unggul" },
@@ -10,8 +11,6 @@ const info = [
 ];
 
 export default function HomePage() {
-  const latestNews = newsData.slice(0, 4);
-
   return (
     <>
       <section className="relative isolate overflow-hidden bg-gradient-to-br from-emerald-900 to-slate-900 text-white">
@@ -83,6 +82,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <InfoSection />
+
       <section className="mx-auto max-w-6xl px-5">
         <div className="mb-6 flex items-end justify-between">
           <div>
@@ -97,11 +98,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {latestNews.map((n) => (
-            <NewsCard key={n.id} id={n.id} title={n.title} date={n.date} excerpt={n.excerpt} image={n.image} />
-          ))}
-        </div>
+        <NewsList limit={4} className="sm:grid-cols-2 lg:grid-cols-4" />
       </section>
     </>
   );

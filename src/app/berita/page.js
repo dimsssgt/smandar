@@ -1,4 +1,4 @@
-import NewsCard, { newsData } from "../../components/NewsCard";
+import NewsList from "../../components/NewsList";
 
 export default function BeritaPage() {
   return (
@@ -9,10 +9,8 @@ export default function BeritaPage() {
         Kabar kegiatan, prestasi, dan dinamika kehidupan SMA Negeri 1 Bandar.
       </p>
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {newsData.map((n) => (
-          <NewsCard key={n.id} id={n.id} title={n.title} date={n.date} excerpt={n.excerpt} image={n.image} />
-        ))}
+      <div className="mt-10">
+        <NewsList />
       </div>
     </div>
   );
