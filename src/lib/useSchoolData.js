@@ -1,20 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SEED, getList } from "./adminStore";
+import { supabase } from "./supabase";
 
 export function useSchoolData(name) {
-  const [items, setItems] = useState(SEED[name] || []);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    const load = () => setItems(getList(name));
-    load();
-    window.addEventListener("smandar:change", load);
-    window.addEventListener("storage", load);
-    return () => {
-      window.removeEventListener("smandar:change", load);
-      window.removeEventListener("storage", load);
-    };
+    supabase
+      .from(name)
+      .select("*")
+      .order("date", { ascending: false })
+      .then(({ data }) => setItems(data || []));
   }, [name]);
 
   return items;
